@@ -111,6 +111,7 @@ jobs:
                 cp precompiled/linux-image-*.deb .
             fi
             echo "KERNELPACKAGE=`dpkg-deb -f linux-image-*.deb Package | cut -f2`" >> $GITHUB_OUTPUT
+            echo "=== 正在手动创建缺失的目录 ==="
             mkdir -p precompiled/flash
             cp rb1-boot.img precompiled/flash/boot.img
 
