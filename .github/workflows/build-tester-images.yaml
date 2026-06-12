@@ -44,7 +44,8 @@ concurrency:
 jobs:
   build-and-push-debian-image:
     # runs-on: debian-linux-images--linux-arm64-8core-32gb
-    runs-on: ubuntu-latest-arm64
+    # runs-on: ubuntu-latest-arm64
+    runs-on: ubuntu-latest
     environment: staging
     container:
       image: debian:trixie
