@@ -152,12 +152,6 @@ jobs:
         run: |
           BUILD_ID="$(date +'%Y%m%d')-${{ env.TARGET }}"
           echo "BUILD_ID=${BUILD_ID}" >> $GITHUB_OUTPUT
-
-      # === 关键：在此处插入安装 UML 依赖的步骤 ===
-      - name: Install User Mode Linux dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y user-mode-linux
           
       - name: Build rootfs with debos
         env:
@@ -165,7 +159,7 @@ jobs:
         run: |
           set -ux
           debos \
-              -b uml \
+              -b qemu \
               -t overlays:${{ env.OVERLAYS }} \
               -t xfcedesktop:true \
               -t aptlocalrepo:${PWD}/local-apt-repo \
@@ -180,7 +174,7 @@ jobs:
         run: |
           set -ux
           debos \
-              -b uml \
+              -b qemu \
               -t imagetype:sdcard \
               -t aptlocalrepo:${PWD}/local-apt-repo \
               -t includecontainers:true \
@@ -191,7 +185,7 @@ jobs:
         run: |
           set -ux
           debos \
-              -b uml \
+              -b qemu \
               -t imagetype:sdcard \
               --print-recipe \
               -t rootsize:${{ steps.rootfs.outputs.ROOT_SIZE }} \
