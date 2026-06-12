@@ -153,6 +153,12 @@ jobs:
           BUILD_ID="$(date +'%Y%m%d')-${{ env.TARGET }}"
           echo "BUILD_ID=${BUILD_ID}" >> $GITHUB_OUTPUT
 
+      # === 关键：在此处插入安装 UML 依赖的步骤 ===
+      - name: Install User Mode Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y user-mode-linux
+          
       - name: Build rootfs with debos
         env:
           INCLUDE_IMAGE: ${{ github.event.inputs.release || github.event.inputs.docker-images }}
