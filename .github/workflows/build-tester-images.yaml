@@ -159,6 +159,7 @@ jobs:
         run: |
           set -ux
           debos \
+              -b uml \
               -t overlays:${{ env.OVERLAYS }} \
               -t xfcedesktop:true \
               -t aptlocalrepo:${PWD}/local-apt-repo \
@@ -172,7 +173,9 @@ jobs:
         id: rootfs
         run: |
           set -ux
-          debos -t imagetype:sdcard \
+          debos \
+              -b uml \
+              -t imagetype:sdcard \
               -t aptlocalrepo:${PWD}/local-apt-repo \
               -t includecontainers:true \
               --print-recipe \
@@ -181,7 +184,9 @@ jobs:
       - name: Build UFS and SD card images with debos
         run: |
           set -ux
-          debos -t imagetype:sdcard \
+          debos \
+              -b uml \
+              -t imagetype:sdcard \
               --print-recipe \
               -t rootsize:${{ steps.rootfs.outputs.ROOT_SIZE }} \
               -t homesize:${{ steps.rootfs.outputs.HOME_SIZE }} \
