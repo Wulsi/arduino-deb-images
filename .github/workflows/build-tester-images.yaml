@@ -46,7 +46,7 @@ jobs:
     # runs-on: debian-linux-images--linux-arm64-8core-32gb
     # runs-on: ubuntu-latest-arm64
     # runs-on: ubuntu-latest
-    runs-on: [self-hosted, bookkk]
+    runs-on: [self-hosted, bookkk_label]
     environment: staging
     container:
       image: debian:trixie
